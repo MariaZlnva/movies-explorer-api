@@ -67,10 +67,8 @@ const addMovieToSave = (req, res, next) => {
 const deleteMovie = (req, res, next) => {
   console.log('пришел запрос на deleteMovie');
   const userId = req.user._id;
-  console.log('userId =>', userId);
-  const { _id: movieId } = req.params;
-  console.log('movieId =>', movieId);
-  Movie.findById(movieId)
+  const idMovieDB = req.params._id; // id фильма в сохраненных
+  Movie.findById(idMovieDB)
     .populate([{ path: 'owner', model: 'user' }])
     .then((movie) => {
       if (!movie) {

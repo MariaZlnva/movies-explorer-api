@@ -11,7 +11,9 @@ const mongoose = require('mongoose');
 // Импортируем мидлвары
 const cors = require('cors');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
 const errorHandler = require('./middlewares/errorHandler');
+const limiter = require('./middlewares/limiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { corsOptions } = require('./middlewares/cors');
 
@@ -26,11 +28,13 @@ mongoose.connect(DB_ADDRESS, {
   useNewUrlParser: true,
 });
 
+app.use(cors(corsOptions)); // настройка кросс-домен. запр.
+app.use(limiter); // ограничивает количество запросов с одного IP
+app.use(helmet()); // автом.простав.заголовки безопастности
+
 // Миддлвэры для парсинга входящих данных со стороны клиента
 app.use(express.json()); // для собирания JSON-формата
 app.use(express.urlencoded({ extended: true }));
-
-app.use(cors(corsOptions));
 
 // Логгер запросов
 app.use(requestLogger);

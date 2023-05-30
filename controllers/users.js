@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); // импортируем модуль создания токенов
 
 const { NODE_ENV, JWT_SECRET } = process.env;
+const { JWT_SECRET_DEV } = require('../config');
+
 // Импортируем схему модели
 const User = require('../models/user');
 
@@ -52,7 +54,7 @@ const login = (req, res, next) => {
     .then((user) => {
       // аутентификация успешна - email и пароль проверены
       // создадим токен
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'jwt_key_dev', {
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : JWT_SECRET_DEV, {
         expiresIn: '7d',
       });
       // вернём токен
