@@ -18,13 +18,15 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { corsOptions } = require('./middlewares/cors');
 
 // Импортируем переменные
-const { PORT, DB_ADDRESS } = require('./config');
+const {
+  NODE_ENV, PORT, DB_ADDRESS_DEV, DB_ADDRESS,
+} = require('./config');
 
 // Импортируем роутеры
 const router = require('./routes/index');
 
 // Подключаемся к серверу mongo
-mongoose.connect(DB_ADDRESS, {
+mongoose.connect(NODE_ENV === 'production' ? DB_ADDRESS : DB_ADDRESS_DEV, {
   useNewUrlParser: true,
 });
 
