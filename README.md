@@ -4,11 +4,11 @@
 
 ## Ссылки на проект
 
-IP 158.160.68.240-------------------
+IP 158.160.5.120
 
 Frontend 
 
-Backend 
+Backend: https://api.movies.zlnva.nomoredomains.rocks/
 
 ## Для запуска проекта:
 
