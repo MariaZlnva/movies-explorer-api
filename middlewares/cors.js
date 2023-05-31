@@ -1,7 +1,7 @@
 const corsOptions = {
   origin: [
-    // 'https://mesto.zlnva.nomoredomains.monster',
-    // 'http://mesto.zlnva.nomoredomains.monster',
+    'https://movies.zlnva.nomoredomains.rocks',
+    'http://movies.zlnva.nomoredomains.rocks',
     'https://localhost:3000',
     'http://localhost:3000',
     'https://localhost:3001',

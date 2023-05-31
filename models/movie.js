@@ -2,6 +2,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
+const { INVALID_LINK } = require('../utils/constants');
+
 // Создаем схему для пользователя через Mongoose
 const movieSchema = new mongoose.Schema(
   {
@@ -30,7 +32,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator: (url) => validator.isURL(url),
-        message: 'Некорректная ссылка',
+        message: INVALID_LINK,
       },
     },
     trailerLink: {
@@ -38,7 +40,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator: (url) => validator.isURL(url),
-        message: 'Некорректная ссылка',
+        message: INVALID_LINK,
       },
     },
     thumbnail: { // миниатюрное изображение постера к фильму
@@ -46,7 +48,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator: (url) => validator.isURL(url),
-        message: 'Некорректная ссылка',
+        message: INVALID_LINK,
       },
     },
     owner: {

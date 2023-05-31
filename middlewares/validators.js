@@ -1,6 +1,6 @@
 const { celebrate, Joi } = require('celebrate');
 
-const { REGEX_URL } = require('../constants/regex');
+const { REGEX_URL } = require('../utils/constants');
 
 // валидируем данные пользов перед созданием
 const validationCreateUser = celebrate({
@@ -44,7 +44,7 @@ const validationDataMovie = celebrate({
 
 const validationIdMovie = celebrate({
   params: Joi.object().keys({
-    _id: Joi.string().required().length(24),
+    _id: Joi.string().hex().required().length(24),
   }),
 });
 

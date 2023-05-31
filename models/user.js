@@ -6,6 +6,8 @@ const bcrypt = require('bcryptjs');
 // Импортируем класс ошибок
 const UnauthorizedError = require('../errors/Unauthorized');
 
+const { INVALID_EMAIL, INCORRECT_EMAIL_PASSWORD } = require('../utils/constants');
+
 // Создаем схему для пользователя через Mongoose
 const userSchema = new mongoose.Schema(
   {
@@ -15,7 +17,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       validate: {
         validator: (email) => validator.isEmail(email), // isEmail()проверяет явл ли строка email
-        message: 'Некорректный адрес почты', // если validator - false выведется это сообщение
+        message: INVALID_EMAIL, // если validator - false выведется это сообщение
       },
     },
     password: {
@@ -35,16 +37,16 @@ const userSchema = new mongoose.Schema(
 
 // доб.собств.метод в св-во statics - проверяет почту и пароль на соотв.в БД
 userSchema.statics.findUserByCredentials = function (email, password) {
-  console.log('пришли проверять наличие в БД емайл и пароль');
+  // console.log('пришли проверять наличие в БД емайл и пароль');
   return this.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new UnauthorizedError('Неправильные почта или пароль'));
+        return Promise.reject(new UnauthorizedError(INCORRECT_EMAIL_PASSWORD));
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) { // хеши не совпали — отклоняем промис
-            return Promise.reject(new UnauthorizedError('Неправильные почта или пароль'));
+            return Promise.reject(new UnauthorizedError(INCORRECT_EMAIL_PASSWORD));
           }
           return user;
         });

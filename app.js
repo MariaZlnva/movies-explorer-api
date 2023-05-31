@@ -20,7 +20,7 @@ const { corsOptions } = require('./middlewares/cors');
 // Импортируем переменные
 const {
   NODE_ENV, PORT, DB_ADDRESS_DEV, DB_ADDRESS,
-} = require('./config');
+} = require('./utils/config');
 
 // Импортируем роутеры
 const router = require('./routes/index');
@@ -30,9 +30,9 @@ mongoose.connect(NODE_ENV === 'production' ? DB_ADDRESS : DB_ADDRESS_DEV, {
   useNewUrlParser: true,
 });
 
-app.use(cors(corsOptions)); // настройка кросс-домен. запр.
 app.use(limiter); // ограничивает количество запросов с одного IP
 app.use(helmet()); // автом.простав.заголовки безопастности
+app.use(cors(corsOptions)); // настройка кросс-домен. запр.
 
 // Миддлвэры для парсинга входящих данных со стороны клиента
 app.use(express.json()); // для собирания JSON-формата

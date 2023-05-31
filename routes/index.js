@@ -21,6 +21,8 @@ const {
 // Импортируем классы ошибок
 const NotFoundError = require('../errors/NotFound');
 
+const { PAGE_NOT_FOUND } = require('../utils/constants');
+
 // Роутеры без авторизации
 router.post('/signup', validationCreateUser, createUser);
 router.post('/signin', validationLogin, login);
@@ -31,7 +33,7 @@ router.use('/movies', auth, movies);
 
 // Роутер запросов по несуществующим адресам
 router.use('*', auth, (req, res, next) => {
-  next(new NotFoundError('Страница не найдена'));
+  next(new NotFoundError(PAGE_NOT_FOUND));
 });
 
 module.exports = router;
