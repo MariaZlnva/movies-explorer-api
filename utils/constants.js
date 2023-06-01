@@ -10,6 +10,8 @@ const PAGE_NOT_FOUND = 'Страница не найдена';
 const INVALID_EMAIL = 'Некорректный адрес почты';
 const INCORRECT_EMAIL_PASSWORD = 'Неправильные почта или пароль';
 const INVALID_LINK = 'Некорректная ссылка';
+const INVALID_USER_DATA = 'Переданы некорректные данные';
+const INVALID_DATA = 'Некорректные данные';
 
 const REGEX_URL = /https*:\/\/(www.)?([a-y0-9-]+).([a-y]{2,10})((\/[\w^\W/]+))?#?/;
 
@@ -25,5 +27,7 @@ module.exports = {
   INCORRECT_EMAIL_PASSWORD,
   INVALID_EMAIL,
   INVALID_LINK,
+  INVALID_USER_DATA,
+  INVALID_DATA,
   REGEX_URL,
 };

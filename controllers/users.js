@@ -2,6 +2,9 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); // импортируем модуль создания токенов
 
+// Импорт классов ошибок из mongoose.Error
+const { CastError, ValidationError } = require('mongoose').Error;
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 const { JWT_SECRET_DEV } = require('../utils/config');
 
@@ -11,11 +14,14 @@ const User = require('../models/user');
 // Импортируем классы ошибок
 const NotFoundError = require('../errors/NotFound');
 const ConflictReqError = require('../errors/ConflictReq');
+const BadRequestError = require('../errors/BadRequest');
 
 // Импортируем сообщения ответов
 const {
   USER_REGISTERED,
   USER_NOT_FOUND,
+  INVALID_USER_DATA,
+  INVALID_DATA,
 } = require('../utils/constants');
 
 // создаёт пользователя с переданными в теле  email, password и name  POST /signup
@@ -38,6 +44,8 @@ const createUser = (req, res, next) => {
     .catch((err) => {
       if (err.code === 11000) {
         next(new ConflictReqError(USER_REGISTERED));
+      } else if (err instanceof ValidationError) {
+        next(new BadRequestError(INVALID_USER_DATA));
       } else {
         next(err);
       }
@@ -88,7 +96,16 @@ const updateUserData = (req, res, next) => {
         res.send(user); // обновляет информацию о пользователе (email и имя)
       }
     })
-    .catch((err) => next(err));
+    // .catch((err) => next(err));
+    .catch((err) => {
+      if (err instanceof CastError) {
+        next(new BadRequestError(INVALID_DATA));
+      } else if (err instanceof ValidationError) {
+        next(new BadRequestError(INVALID_USER_DATA));
+      } else {
+        next(err);
+      }
+    });
 };
 
 module.exports = {
