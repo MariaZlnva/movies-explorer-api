@@ -30,6 +30,9 @@ mongoose.connect(NODE_ENV === 'production' ? DB_ADDRESS : DB_ADDRESS_DEV, {
   useNewUrlParser: true,
 });
 
+// Логгер запросов
+app.use(requestLogger);
+
 app.use(limiter); // ограничивает количество запросов с одного IP
 app.use(helmet()); // автом.простав.заголовки безопастности
 app.use(cors(corsOptions)); // настройка кросс-домен. запр.
@@ -37,9 +40,6 @@ app.use(cors(corsOptions)); // настройка кросс-домен. зап�
 // Миддлвэры для парсинга входящих данных со стороны клиента
 app.use(express.json()); // для собирания JSON-формата
 app.use(express.urlencoded({ extended: true }));
-
-// Логгер запросов
-app.use(requestLogger);
 
 // Роутинг
 app.use(router);
