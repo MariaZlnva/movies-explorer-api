@@ -1,14 +1,16 @@
 // Переменные, содержащие сообщения об ошибках/ответах
-const USER_REGISTERED = 'Пользователь с указанным электронным адресом уже зарегистрирован';
+const USER_REGISTERED = 'Пользователь с таким email уже существует.';
 const USER_NOT_FOUND = 'Пользователь не найден';
 const MOVIE_NOT_FOUND = 'Фильм не найден';
 const DELETE_NOT_ALLOWED = 'Нет прав на удаление';
 const MOVIE_DELETED = 'Фильм удален';
 const UNAUTHORIZED_USER = 'Необходима авторизация';
+const UNAUTHORIZED_USER_TOKEN_NOTFOUND = 'При авторизации произошла ошибка. Токен не передан или передан не в том формате.';
+const UNAUTHORIZED_USER_TOKEN_INCORRECT = 'При авторизации произошла ошибка. Переданный токен некорректен';
 const SERVER_ERROR = 'На сервере произошла ошибка';
-const PAGE_NOT_FOUND = 'Страница не найдена';
+const PAGE_NOT_FOUND = 'Страница по указанному маршруту не найдена';
 const INVALID_EMAIL = 'Некорректный адрес почты';
-const INCORRECT_EMAIL_PASSWORD = 'Неправильные почта или пароль';
+const INCORRECT_EMAIL_PASSWORD = 'Вы ввели неправильный логин или пароль.';
 const INVALID_LINK = 'Некорректная ссылка';
 const INVALID_USER_DATA = 'Переданы некорректные данные';
 const INVALID_DATA = 'Некорректные данные';
@@ -22,6 +24,8 @@ module.exports = {
   DELETE_NOT_ALLOWED,
   MOVIE_DELETED,
   UNAUTHORIZED_USER,
+  UNAUTHORIZED_USER_TOKEN_NOTFOUND,
+  UNAUTHORIZED_USER_TOKEN_INCORRECT,
   SERVER_ERROR,
   PAGE_NOT_FOUND,
   INCORRECT_EMAIL_PASSWORD,

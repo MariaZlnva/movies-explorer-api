@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema(
 
 // доб.собств.метод в св-во statics - проверяет почту и пароль на соотв.в БД
 userSchema.statics.findUserByCredentials = function (email, password) {
-  // console.log('пришли проверять наличие в БД емайл и пароль');
+  console.log('пришли проверять наличие в БД емайл и пароль');
   return this.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {

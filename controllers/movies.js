@@ -25,7 +25,7 @@ const getUserMovies = (req, res, next) => {
 };
 
 const addMovieToSave = (req, res, next) => {
-  // console.log('пришел запрос на addMovieToSave');
+  console.log('пришел запрос на addMovieToSave');
   const {
     country,
     director,
@@ -62,9 +62,10 @@ const addMovieToSave = (req, res, next) => {
 };
 
 const deleteMovie = (req, res, next) => {
-  // console.log('пришел запрос на deleteMovie');
+  console.log('пришел запрос на deleteMovie');
   const userId = req.user._id;
   const idMovieDB = req.params._id; // id фильма в сохраненных
+  console.log(userId, idMovieDB);
   Movie.findById(idMovieDB)
     .populate([{ path: 'owner', model: 'user' }])
     .then((movie) => {
@@ -76,8 +77,8 @@ const deleteMovie = (req, res, next) => {
       }
       return movie.deleteOne();
     })
-    .then(() => {
-      res.send({ message: MOVIE_DELETED });
+    .then((movie) => {
+      res.send({ message: MOVIE_DELETED, movie });
     })
     .catch((err) => next(err));
 };

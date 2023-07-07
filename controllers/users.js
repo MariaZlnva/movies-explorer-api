@@ -26,7 +26,7 @@ const {
 
 // создаёт пользователя с переданными в теле  email, password и name  POST /signup
 const createUser = (req, res, next) => {
-  // console.log('создаем юзера');
+  console.log('создаем юзера');
   const {
     email, password, name,
   } = req.body;
@@ -54,8 +54,10 @@ const createUser = (req, res, next) => {
 
 // проверяет переданные в теле почту и пароль и возвращает JWT POST /signin
 const login = (req, res, next) => {
-  // console.log('пришел запрос на авторизацию');
+  console.log('пришел запрос на авторизацию');
+
   const { email, password } = req.body;
+  console.log(email, password);
   User.findUserByCredentials(email, password)
     .then((user) => {
       // аутентификация успешна - email и пароль проверены
@@ -69,7 +71,8 @@ const login = (req, res, next) => {
 };
 
 const getUserData = (req, res, next) => {
-  // console.log('Пришел запрос на получение юзера');
+  console.log('Пришел запрос на получение юзера');
+  console.log(req.user);
   const { _id } = req.user;
   User.findById(_id)
     .then((user) => {
