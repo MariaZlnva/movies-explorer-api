@@ -105,6 +105,8 @@ const updateUserData = (req, res, next) => {
         next(new BadRequestError(INVALID_DATA));
       } else if (err instanceof ValidationError) {
         next(new BadRequestError(INVALID_USER_DATA));
+      } else if (err.code === 11000) {
+        next(new ConflictReqError(USER_REGISTERED));
       } else {
         next(err);
       }
