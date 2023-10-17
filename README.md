@@ -29,8 +29,8 @@ NodeJS, Postman, Express, MongoDB, mongoose, CORS, JWT, celebrate, bcryptjs, hel
 - добавить эндпоинт для обрабатки POST запроса выхода пользователя.
 
 ### 🔗 Ссылки:
-- [Ссылка на проект](https://movies.zlnva.nomoredomains.rocks)  
-- [Ссылка на API сервер проекта](https://api.movies.zlnva.nomoredomains.rocks)  
-- IP адрес проекта: 158.160.5.120
+- [Ссылка на сайт проекта на Github pages](https://mariazlnva.github.io/movies-explorer-frontend/)  
+- [Ссылка на API сервер проекта](https://api.movies.zlnva.nomoredomains.rocks)
+  
 - [Адрес репозитория backend](https://github.com/MariaZlnva/movies-explorer-api)
 - [Адрес репозитория frontend](https://github.com/MariaZlnva/movies-explorer-frontend)
